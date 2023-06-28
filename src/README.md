@@ -1,8 +1,8 @@
 <!-- NOTE: README.md is generated from src/README.md -->
 
-# @codemirror/lang-sql [![NPM version](https://img.shields.io/npm/v/@codemirror/lang-sql.svg)](https://www.npmjs.org/package/@codemirror/lang-sql)
+# @persona-id/lang-sql-with-js [![NPM version](https://img.shields.io/npm/v/@persona-id/lang-sql-with-js.svg)](https://www.npmjs.org/package/@persona-id/lang-sql-with-js)
 
-[ [**WEBSITE**](https://codemirror.net/) | [**ISSUES**](https://github.com/codemirror/dev/issues) | [**FORUM**](https://discuss.codemirror.net/c/next/) | [**CHANGELOG**](https://github.com/codemirror/lang-sql/blob/main/CHANGELOG.md) ]
+[ [**WEBSITE**](https://codemirror.net/) | [**ISSUES**](https://github.com/codemirror/dev/issues) | [**FORUM**](https://discuss.codemirror.net/c/next/) | [**CHANGELOG**](https://github.com/persona-id/lang-sql-with-js/blob/main/CHANGELOG.md) ]
 
 This package implements SQL language support for the
 [CodeMirror](https://codemirror.net/) code editor.
@@ -12,7 +12,7 @@ number of [examples](https://codemirror.net/examples/) and the
 [documentation](https://codemirror.net/docs/).
 
 This code is released under an
-[MIT license](https://github.com/codemirror/lang-sql/tree/main/LICENSE).
+[MIT license](https://github.com/persona-id/lang-sql-with-js/tree/main/LICENSE).
 
 We aim to be an inclusive, welcoming community. To make that explicit,
 we have a [code of

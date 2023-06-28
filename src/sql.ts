@@ -1,10 +1,12 @@
 import {continuedIndent, indentNodeProp, foldNodeProp, LRLanguage, LanguageSupport} from "@codemirror/language"
 import {Extension} from "@codemirror/state"
+import {parseMixed} from "@lezer/common"
 import {Completion, CompletionSource} from "@codemirror/autocomplete"
 import {styleTags, tags as t} from "@lezer/highlight"
 import {parser as baseParser} from "./sql.grammar"
 import {tokens, Dialect, tokensFor, SQLKeywords, SQLTypes, dialect} from "./tokens"
 import {completeFromSchema, completeKeywords} from "./complete"
+import {javascript} from "@codemirror/lang-javascript";
 
 let parser = baseParser.configure({
   props: [
@@ -34,7 +36,8 @@ let parser = baseParser.configure({
       "Semi Punctuation": t.punctuation,
       "( )": t.paren,
       "{ }": t.brace,
-      "[ ]": t.squareBracket
+      "[ ]": t.squareBracket,
+      Directive: t.special(t.string),
     })
   ]
 })
@@ -84,12 +87,12 @@ export type SQLDialectSpec = {
 /// Represents an SQL dialect.
 export class SQLDialect {
   private constructor(
-    /// @internal
-    readonly dialect: Dialect,
-    /// The language for this dialect.
-    readonly language: LRLanguage,
-    /// The spec used to define this dialect.
-    readonly spec: SQLDialectSpec
+      /// @internal
+      readonly dialect: Dialect,
+      /// The language for this dialect.
+      readonly language: LRLanguage,
+      /// The spec used to define this dialect.
+      readonly spec: SQLDialectSpec
   ) {}
 
   /// Returns the language for this dialect as an extension.
@@ -101,7 +104,16 @@ export class SQLDialect {
     let language = LRLanguage.define({
       name: "sql",
       parser: parser.configure({
-        tokenizers: [{from: tokens, to: tokensFor(d)}]
+        tokenizers: [{from: tokens, to: tokensFor(d)}],
+        wrap: parseMixed((node) => {
+          console.log(node.type.name);
+          return node.type.isTop
+              ? {
+                parser: javascript().language.parser,
+                overlay: (node) => node.type.name === 'Directive',
+              }
+              : null;
+        }),
       }),
       languageData: {
         commentTokens: {line: "--", block: {open: "/*", close: "*/"}},
@@ -157,9 +169,9 @@ export function keywordCompletion(dialect: SQLDialect, upperCase = false): Exten
 /// for the given configuration.
 export function schemaCompletionSource(config: SQLConfig): CompletionSource {
   return config.schema ? completeFromSchema(config.schema, config.tables, config.schemas,
-                                            config.defaultTable, config.defaultSchema,
-                                            config.dialect || StandardSQL)
-    : () => null
+          config.defaultTable, config.defaultSchema,
+          config.dialect || StandardSQL)
+      : () => null
 }
 
 /// FIXME remove on 1.0 @internal
@@ -167,14 +179,14 @@ export function schemaCompletion(config: SQLConfig): Extension {
   return config.schema ? (config.dialect || StandardSQL).language.data.of({
     autocomplete: schemaCompletionSource(config)
   }) : []
-}
+}``
 
 /// SQL language support for the given SQL dialect, with keyword
 /// completion, and, if provided, schema-based completion as extra
 /// extensions.
 export function sql(config: SQLConfig = {}) {
   let lang = config.dialect || StandardSQL
-  return new LanguageSupport(lang.language, [schemaCompletion(config), keywordCompletion(lang, !!config.upperCaseKeywords)])
+  return new LanguageSupport(lang.language, [schemaCompletion(config), keywordCompletion(lang, !!config.upperCaseKeywords), javascript().support])
 }
 
 /// The standard SQL dialect.

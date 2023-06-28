@@ -1,8 +1,8 @@
 import {ExternalTokenizer, InputStream} from "@lezer/lr"
 import {whitespace, LineComment, BlockComment, String as StringToken, Number, Bits, Bytes, Bool, Null,
-        ParenL, ParenR, BraceL, BraceR, BracketL, BracketR, Semi, Dot,
-        Operator, Punctuation, SpecialVar, Identifier, QuotedIdentifier,
-        Keyword, Type, Builtin} from "./sql.grammar.terms"
+  ParenL, ParenR, BraceL, BraceR, BracketL, BracketR, Semi, Dot,
+  Operator, Punctuation, SpecialVar, Identifier, QuotedIdentifier,
+  Keyword, Type, Builtin, Directive} from "./sql.grammar.terms"
 
 const enum Ch {
   Newline = 10,
@@ -185,11 +185,11 @@ export function tokensFor(d: Dialect) {
       readLiteral(input, next, d.backslashEscapes)
       input.acceptToken(StringToken)
     } else if (next == Ch.Hash && d.hashComments ||
-               next == Ch.Slash && input.next == Ch.Slash && d.slashComments) {
+        next == Ch.Slash && input.next == Ch.Slash && d.slashComments) {
       eol(input)
       input.acceptToken(LineComment)
     } else if (next == Ch.Dash && input.next == Ch.Dash &&
-               (!d.spaceAfterDashes || input.peek(1) == Ch.Space)) {
+        (!d.spaceAfterDashes || input.peek(1) == Ch.Space)) {
       eol(input)
       input.acceptToken(LineComment)
     } else if (next == Ch.Slash && input.next == Ch.Star) {
@@ -212,7 +212,7 @@ export function tokensFor(d: Dialect) {
       input.advance()
       readLiteral(input, Ch.SingleQuote, true)
     } else if ((next == Ch.n || next == Ch.N) && input.next == Ch.SingleQuote &&
-               d.charSetCasts) {
+        d.charSetCasts) {
       input.advance()
       readLiteral(input, Ch.SingleQuote, d.backslashEscapes)
       input.acceptToken(StringToken)
@@ -256,7 +256,7 @@ export function tokensFor(d: Dialect) {
         input.acceptToken(Bits)
       }
     } else if (next == Ch._0 && (input.next == Ch.x || input.next == Ch.X) ||
-               (next == Ch.x || next == Ch.X) && input.next == Ch.SingleQuote) {
+        (next == Ch.x || next == Ch.X) && input.next == Ch.SingleQuote) {
       let quoted = input.next == Ch.SingleQuote
       input.advance()
       while (isHexDigit(input.next)) input.advance()

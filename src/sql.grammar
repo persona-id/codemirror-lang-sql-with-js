@@ -7,6 +7,22 @@
 
 @skip { whitespace | LineComment | BlockComment }
 
+@tokens {
+  Directive { DirectiveStart DirectiveContent* DirectiveEnd }
+
+  DirectiveStart[closedBy="DirectiveEnd"] { "{{" }
+
+  DirectiveEnd[openedBy="DirectiveStart"] { "}}" }
+
+  DirectiveContent {
+    unicodeChar |
+    "}" ![}] |
+    "\\}}"
+  }
+
+  unicodeChar { $[\u0000-\u007C] | $[\u007E-\u06FF] }
+}
+
 element {
   String |
   Number |
@@ -19,7 +35,7 @@ element {
   Builtin |
   SpecialVar |
   CompositeIdentifier {
-    Dot? (QuotedIdentifier | Identifier | SpecialVar) (!dot Dot (QuotedIdentifier | Identifier | SpecialVar))+
+     Dot? (QuotedIdentifier | Identifier | SpecialVar | Directive) (!dot Dot (QuotedIdentifier | Identifier | SpecialVar | Directive))+
   } |
   Keyword |
   Type |
@@ -27,7 +43,8 @@ element {
   Punctuation |
   Parens { ParenL element* ParenR } |
   Braces { BraceL element* BraceR } |
-  Brackets { BracketL element* BracketR }
+  Brackets { BracketL element* BracketR } |
+  Directive
 }
 
 @external tokens tokens from "./tokens" {

@@ -1,6 +1,6 @@
 import {EditorState} from "@codemirror/state"
 import {CompletionContext, CompletionResult, CompletionSource} from "@codemirror/autocomplete"
-import {schemaCompletionSource, PostgreSQL, MySQL, SQLConfig} from "@codemirror/lang-sql"
+import {schemaCompletionSource, PostgreSQL, MySQL, SQLConfig} from "@persona-id/lang-sql-with-js";
 import ist from "ist"
 
 function get(doc: string, conf: SQLConfig & {explicit?: boolean} = {}) {

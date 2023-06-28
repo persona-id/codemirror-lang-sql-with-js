@@ -1,7 +1,7 @@
 {
-  "name": "@codemirror/lang-sql",
+  "name": "@persona-id/lang-sql-with-js",
   "version": "6.5.2",
-  "description": "SQL language support for the CodeMirror code editor",
+  "description": "SQL-JS mixed language support for the CodeMirror code editor",
   "scripts": {
     "test": "cm-runtests",
     "prepare": "cm-buildhelper src/sql.ts"
@@ -27,9 +27,10 @@
   "license": "MIT",
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.0",
-    "@lezer/highlight": "^1.0.0",
+    "@codemirror/lang-javascript": "^6.1.7",
     "@codemirror/language": "^6.0.0",
     "@codemirror/state": "^6.0.0",
+    "@lezer/highlight": "^1.0.0",
     "@lezer/lr": "^1.0.0"
   },
   "devDependencies": {
@@ -37,6 +38,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codemirror/lang-sql.git"
+    "url": "https://github.com/persona-id/lang-sql-with-js.git"
   }
 }

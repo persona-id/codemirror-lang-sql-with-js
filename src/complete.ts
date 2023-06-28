@@ -46,9 +46,9 @@ function sourceContext(state: EditorState, startPos: number) {
   let aliases = getAliases(state.doc, pos)
   if (pos.name == "Identifier" || pos.name == "QuotedIdentifier" || pos.name == "Keyword") {
     return {from: pos.from,
-            quoted: pos.name == "QuotedIdentifier" ? state.doc.sliceString(pos.from, pos.from + 1) : null,
-            parents: parentsFor(state.doc, tokenBefore(pos)),
-            aliases}
+      quoted: pos.name == "QuotedIdentifier" ? state.doc.sliceString(pos.from, pos.from + 1) : null,
+      parents: parentsFor(state.doc, tokenBefore(pos)),
+      aliases}
   } if (pos.name == ".") {
     return {from: startPos, quoted: null, parents: parentsFor(state.doc, pos), aliases}
   } else {
@@ -170,5 +170,5 @@ export function completeKeywords(keywords: {[name: string]: number}, upperCase: 
     boost: -1
   }))
   return ifNotIn(["QuotedIdentifier", "SpecialVar", "String", "LineComment", "BlockComment", "."],
-                 completeFromList(completions))
+      completeFromList(completions))
 }

@@ -1,11 +1,19 @@
 import ist from "ist"
-import {PostgreSQL, MySQL, SQLDialect} from "@codemirror/lang-sql"
+import {PostgreSQL, MySQL, SQLDialect, StandardSQL} from '@persona-id/lang-sql-with-js'
 
+const standardTokens = StandardSQL.language
 const mysqlTokens = MySQL.language
 const postgresqlTokens = PostgreSQL.language
 const bigQueryTokens = SQLDialect.define({
   treatBitsAsBytes: true
 }).language
+
+describe("Parses Standard Token", ()=> {
+  const parser = standardTokens.parser
+  it("parses embedded Javascript directive", () => {
+    ist(parser.parse("{{ parseInt(user.id) }}"), 'Script(Statement(Directive))')
+  })
+})
 
 describe("Parse MySQL tokens", () => {
   const parser = mysqlTokens.parser
