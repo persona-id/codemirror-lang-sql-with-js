@@ -1,6 +1,6 @@
 <!-- NOTE: README.md is generated from src/README.md -->
 
-# @persona-id/lang-sql-with-js [![NPM version](https://img.shields.io/npm/v/@persona-id/lang-sql-with-js.svg)](https://www.npmjs.org/package/@persona-id/lang-sql-with-js)
+# @persona-id/codemirror-lang-sql-with-js [![NPM version](https://img.shields.io/npm/v/@persona-id/lang-sql-with-js.svg)](https://www.npmjs.org/package/@persona-id/codemirror-lang-sql-with-js)
 
 [ [**WEBSITE**](https://codemirror.net/) | [**ISSUES**](https://github.com/codemirror/dev/issues) | [**FORUM**](https://discuss.codemirror.net/c/next/) | [**CHANGELOG**](https://github.com/codemirror/lang-sql/blob/main/CHANGELOG.md) ]
 

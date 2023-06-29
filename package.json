@@ -1,6 +1,6 @@
 {
-  "name": "@persona-id/lang-sql-with-js",
-  "version": "6.5.2",
+  "name": "@persona-id/codemirror-lang-sql-with-js",
+  "version": "1.0.0",
   "description": "SQL-JS mixed language support for the CodeMirror code editor",
   "scripts": {
     "test": "cm-runtests",
@@ -10,11 +10,19 @@
     "editor",
     "code"
   ],
-  "author": {
-    "name": "Marijn Haverbeke",
-    "email": "marijn@haverbeke.berlin",
-    "url": "http://marijnhaverbeke.nl"
-  },
+  "contributors": [
+    {
+      "name": "Marijn Haverbeke",
+      "email": "marijn@haverbeke.berlin",
+      "url": "http://marijnhaverbeke.nl"
+    },
+    {
+      "name": "Gary Johnson"
+    },
+    {
+      "name": "Lewis Chung"
+    }
+  ],
   "type": "module",
   "main": "dist/index.cjs",
   "exports": {
@@ -38,6 +46,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/persona-id/lang-sql-with-js.git"
+    "url": "https://github.com/persona-id/codemirror-lang-sql-with-js.git"
   }
 }
