@@ -6,7 +6,8 @@ import {styleTags, tags as t} from "@lezer/highlight"
 import {parser as baseParser} from "./sql-with-js.grammar"
 import {tokens, Dialect, tokensFor, SQLKeywords, SQLTypes, dialect} from "./tokens"
 import {javascript} from "@codemirror/lang-javascript";
-import {SQLDialect, SQLDialectSpec} from "@codemirror/lang-sql";
+// @ts-ignore - these are included but not in the d.ts
+import {SQLConfig, SQLDialect, SQLDialectSpec, schemaCompletion, keywordCompletion} from "@codemirror/lang-sql";
 
 let parser = baseParser.configure({
   props: [
@@ -81,6 +82,11 @@ export class SQLDialectWithJS{
     })
     return new SQLDialectWithJS(d, language, spec)
   }
+}
+
+export function sqlWithJs(config: SQLConfig = {}) {
+  let lang = config.dialect || StandardSQLWithJS
+  return new LanguageSupport(lang.language, [schemaCompletion(config), keywordCompletion(lang, !!config.upperCaseKeywords)])
 }
 
 /// The standard SQL dialect.
