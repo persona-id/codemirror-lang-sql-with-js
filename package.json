@@ -4,7 +4,7 @@
   "description": "SQL-JS mixed language support for the CodeMirror code editor",
   "scripts": {
     "test": "cm-runtests",
-    "prepare": "cm-buildhelper src/sql.ts"
+    "prepare": "cm-buildhelper src/sql-with-js.ts"
   },
   "keywords": [
     "editor",
@@ -36,6 +36,7 @@
   "dependencies": {
     "@codemirror/autocomplete": "^6.0.0",
     "@codemirror/lang-javascript": "^6.1.7",
+    "@codemirror/lang-sql": "^6.5.2",
     "@codemirror/language": "^6.0.0",
     "@codemirror/state": "^6.0.0",
     "@lezer/highlight": "^1.0.0",

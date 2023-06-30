@@ -1,10 +1,11 @@
 import ist from "ist"
-import {PostgreSQL, MySQL, SQLDialect, StandardSQL} from '@persona-id/lang-sql-with-js'
+import {MySQLWithJS, PostgreSQLWithJS, SQLDialectWithJS, StandardSQLWithJS} from "@persona-id/codemirror-lang-sql-with-js"
 
-const standardTokens = StandardSQL.language
-const mysqlTokens = MySQL.language
-const postgresqlTokens = PostgreSQL.language
-const bigQueryTokens = SQLDialect.define({
+// get diff languages
+const standardTokens = StandardSQLWithJS.language
+const mysqlTokens = MySQLWithJS.language
+const postgresqlTokens = PostgreSQLWithJS.language
+const bigQueryTokens = SQLDialectWithJS.define({
   treatBitsAsBytes: true
 }).language
 
