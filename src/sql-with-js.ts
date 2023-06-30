@@ -66,7 +66,6 @@ export class SQLDialectWithJS{
       parser: parser.configure({
         tokenizers: [{from: tokens, to: tokensFor(d)}],
         wrap: parseMixed((node) => {
-          console.log(node.type.name);
           return node.type.isTop
               ? {
                 parser: javascript().language.parser,
